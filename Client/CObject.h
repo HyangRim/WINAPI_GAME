@@ -1,4 +1,5 @@
 #pragma once
+#include "global.h"
 
 //오브젝트라는 건, 가장 부모격인 녀석. 오브젝트마다 성향이 있음 
 //어떤 건 UI, 어떤 건 캐릭터... 
@@ -11,9 +12,13 @@
 
 //충돌할 오브젝트, 충돌하지 않을 오브젝트(UI, 배경등등...) <- 이런 식으로 계속 트리처럼 나누는 건 예외가 있을수도 있음. 
 // 따라서 부품기반의 구조가 필요함(컴포넌트 구조)
-//구조의 
+
+
+#include "CCamera.h"
 
 class CCollider;
+class CAnimator;
+
 
 class CObject
 {
@@ -23,7 +28,9 @@ private:
 	Vec2			m_vPos;
 	Vec2			m_vScale;
 
+	//Component
 	CCollider*		m_pCollider;
+	CAnimator*		m_pAnimator;
 
 
 	bool			m_bAlive;			//자기 자신이 활성화 or 비활성화. (삭제 전용)
@@ -42,9 +49,11 @@ public:
 
 
 	CCollider* GetCollider() { return m_pCollider; }
+	CAnimator* GetAnimator() { return m_pAnimator; }
 
 
 	void CreateCollider();
+	void CreateAnimator();
 
 	virtual void OnCollision(CCollider* _pOther) {};
 	virtual void OnCollisionEnter(CCollider* _pOther) {};
@@ -60,16 +69,20 @@ private:
 
 public:
 	virtual void update() = 0;
-
-	//부모에서 함수의 구현이 끝나게, 자식에서 오버라이딩 못하게 막기. 
-	virtual void finalupdate() final;
+	virtual void finalupdate();
 	virtual void render(HDC _dc);
 
 	void component_render(HDC _dc);
+	virtual CObject* Clone() = 0;
 
 public:
 	CObject();
+	CObject(const CObject& _origin);
 	virtual ~CObject();
+
+	//복사 생성자의 문제. -> 단순히 복사만 하면 m_pCollider의 주소가 그대로 복사됨.
+	//따라서 m_pCollider을 따로 만들어줘야 함. 
+	//m_bAlive도 가져올 필요는 없음. 
 
 	friend class CEventMgr;
 };

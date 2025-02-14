@@ -33,3 +33,13 @@ void CPathMgr::init()
 	//상대 경로 설정 완료.
 	//SetWindowText(CCore::GetInstance()->GetMainHwnd(), m_szContentPath);
 }
+
+wstring CPathMgr::GetRelativePath(const wchar_t* _filepath)
+{
+	wstring strFilePath = _filepath;
+	size_t iAbsLen = wcslen(m_szContentPath);
+	size_t iFullLen = strFilePath.length();
+	wstring strRelativePath = strFilePath.substr(iAbsLen, iFullLen - iAbsLen);
+	
+	return strRelativePath;
+}

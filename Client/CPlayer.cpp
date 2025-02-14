@@ -10,15 +10,35 @@
 #include "CMissile.h"
 #include "CTexture.h"
 #include "CCollider.h"
+#include "CAnimator.h"
+#include "CAnimation.h"
 
 CPlayer::CPlayer()
-	: m_pTex(nullptr)
 {
-	m_pTex = CResMgr::GetInstance()->LoadTexture(L"PlayerTex", L"texture\\Tenshi.bmp");
+	//m_pTex = CResMgr::GetInstance()->LoadTexture(L"PlayerTex", L"texture\\Tenshi.bmp");
+
 
 	CreateCollider();
 	GetCollider()->SetOffsetPos(Vec2(0.f, 12.f));
 	GetCollider()->SetScale(Vec2(25.f, 25.f));
+
+	CTexture* m_pTex = CResMgr::GetInstance()->LoadTexture(L"PlayerTex", L"texture\\link_0.bmp");
+
+	//우리 텍스쳐가 완벽하게 편집이 되어 있어서 저렇게 수월하게 할 수 있었음...
+	//근데 그렇지 않은 경우가 정말 많음. 
+
+	
+	CreateAnimator();
+	GetAnimator()->CreateAnimation(L"WALK_DOWN", m_pTex, Vec2(0.f, 260.f), Vec2(60.f, 65.f), Vec2(60.f, 0.f), 0.1f, 10);
+	GetAnimator()->Play(L"WALK_DOWN", true);
+
+	CAnimation* pAnim = GetAnimator()->FindAnimation(L"WALK_DOWN");
+
+	for (int idx = 0; idx < pAnim->GetMaxFrame(); idx++) {
+		pAnim->GetFrame(idx).vOffset = Vec2(0.f, -20.f);
+	}
+	
+	//pAnim->GetFrame(0).vOffset = Vec2(0.f, -20.f);
 }
 
 CPlayer::~CPlayer()
@@ -42,40 +62,59 @@ void CPlayer::update()
 		vPos.x += 200.f * fDT;
 	}
 
-	if (KEY_TAP(KEY::SPACE)) {
+	if (KEY_TAP(KEY::Z)) {
 		CreateMissile();
 	}
 	SetPos(vPos);
+
+	GetAnimator()->update();
 }
 
 void CPlayer::render(HDC _dc)
 {
-	int iWidth = m_pTex->Width();
-	int iHeight = m_pTex->Height();
-
-	Vec2 vPos = GetPos();
-
-	/*
-	BitBlt(_dc,
-		int(vPos.x - ((float)(iWidth / 2.f))),
-		int(vPos.y - ((float)(iHeight / 2.f))),
-		iWidth,
-		iHeight,
-		m_pTex->GetDC(), 
-		0, 0, SRCCOPY);
-	*/
-	//일부 픽셀들을 옮겨서 가져오면 되지 않나?(배경 분홍색 같은 느낌)
-	//Bitblt말고 다른 옮기기 함수가 있음
-	TransparentBlt(_dc, 
-		int(vPos.x - ((float)(iWidth / 2.f))),
-		int(vPos.y - ((float)(iHeight / 2.f))),
-		iWidth, iHeight,
-		m_pTex->GetDC(),
-		0, 0, iWidth, iHeight, 
-		RGB(255, 0, 255));
-
 	//컴포넌트(충돌체, etc...) 가 있는 경우 렌더. 
 	component_render(_dc);
+	CTexture* pTex = CResMgr::GetInstance()->LoadTexture(L"Tenshi", L"texture\\Tenshi.bmp");
+	
+	Vec2 vPos = GetPos();
+	vPos = CCamera::GetInstance()->GetRenderPos(vPos);
+	float width = (float)pTex->Width();
+	float height = (float)pTex->Height();
+
+	BLENDFUNCTION bf = {};
+	bf.BlendOp = AC_SRC_OVER;
+	bf.BlendFlags = 0;
+	bf.AlphaFormat = AC_SRC_ALPHA;
+	bf.SourceConstantAlpha = 255;
+	TransparentBlt(_dc,
+		int(vPos.x - ((float)(width / 2.f))),
+		int(vPos.y - ((float)(height / 2.f))),
+		width, height,
+		pTex->GetDC(),
+		0, 0, width, height,
+		RGB(255, 0, 255));
+	/*
+	AlphaBlend(_dc
+		, vPos.x - width / 2.f
+		, vPos.y - height / 2.f
+		, width, height,
+		pTex->GetDC(),
+		0, 0, width, height, bf
+	);
+	*/
+	/*
+	
+
+
+
+	TransparentBlt(_dc,
+		int(vPos.x - ((float)(width / 2.f))),
+		int(vPos.y - ((float)(height / 2.f))),
+		width, height,
+		pTex->GetDC(),
+		0, 0, width, height,
+		RGB(255, 0, 255));
+	*/
 }
 
 void CPlayer::CreateMissile()
@@ -84,6 +123,8 @@ void CPlayer::CreateMissile()
 	vMissilePos.y -= GetScale().y / 2.f;
 
 	CMissile* pMissile = new CMissile;
+
+	pMissile->SetName(L"Missile_Player");
 	pMissile->SetPos(vMissilePos);
 	pMissile->SetScale(Vec2(25.f, 25.f));
 	pMissile->SetDir(Vec2(0.f, -1.f));

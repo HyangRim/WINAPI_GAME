@@ -83,17 +83,30 @@ void CCollisionMgr::CollisionGroupUpdate(GROUP_TYPE _eLeft, GROUP_TYPE _eRight)
 
 			//현재 충돌한 경우. 
 			if (IsCollision(pLeftCollider, pRightCollider)) {
-
 				if (colliderMapIter->second == false) {
 					//이번 프레임에 막 충돌한 경우.
-					pLeftCollider->OnCollisionEnter(vecRight[rightIDX]->GetCollider());
-					pRightCollider->OnCollisionEnter(vecLeft[leftIDX]->GetCollider());
-					colliderMapIter->second = true;
+					
+					//하필 이제 삭제될 때, 충돌할 때. 그 충돌은 없었던 것이 됨.
+					if (!vecLeft[leftIDX]->IsDead() && !vecRight[rightIDX]->IsDead()) {
+						pLeftCollider->OnCollisionEnter(vecRight[rightIDX]->GetCollider());
+						pRightCollider->OnCollisionEnter(vecLeft[leftIDX]->GetCollider());
+						colliderMapIter->second = true;
+					}
 				}
 				else if (colliderMapIter->second == true) {
 					//이전 프레임에도 충돌하고 있었을 경우. 
-					pLeftCollider->OnCollision(vecRight[rightIDX]->GetCollider());
-					pRightCollider->OnCollision(vecLeft[leftIDX]->GetCollider());
+
+					//이제 죽는 애는 충돌에서 벗어났다고 명시적으로 해줌. 
+					if (vecLeft[leftIDX]->IsDead() || vecRight[rightIDX]->IsDead()) {
+						pLeftCollider->OnCollisionExit(vecRight[rightIDX]->GetCollider());
+						pRightCollider->OnCollisionExit(vecLeft[leftIDX]->GetCollider());
+						colliderMapIter->second = false;
+					}
+					else {
+						pLeftCollider->OnCollision(vecRight[rightIDX]->GetCollider());
+						pRightCollider->OnCollision(vecLeft[leftIDX]->GetCollider());
+					}
+
 				}
 
 			}

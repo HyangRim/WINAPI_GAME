@@ -25,23 +25,29 @@
 #define fDT CTimeMgr::GetInstance()->GetfDT()
 #define DT	CTimeMgr::GetInstance()->GetDT()
 
+#define CLONE(type) type* Clone() {return new type(*this);}
+
 #define KEY_CHECK(key, state) CkeyMgr::GetInstance()->GetKeyState(key) == state
 
 #define KEY_HOLD(key) KEY_CHECK(key, KEY_STATE::HOLD)
 #define KEY_TAP(key) KEY_CHECK(key, KEY_STATE::TAP)
 #define KEY_NONE(key) KEY_CHECK(key, KEY_STATE::NONE)
 #define KEY_AWAY(key) KEY_CHECK(key, KEY_STATE::AWAY)
+#define MOUSE_POS CkeyMgr::GetInstance()->GetMousePos()
 
 #define PI 3.1415926535f
 
+#define TILE_SIZE 64
+
 enum class GROUP_TYPE {
 	DEFAULT,
-	PLAYER,
+	TILE,
 	MONSTER,
+	PLAYER,
 	PROJ_PLAYER,
 	PROJ_MONSTER,
 
-
+	UI = 31,
 	END = 32,
 };
 

@@ -181,7 +181,9 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //  WM_PAINT    - 주 창을 그립니다.
 //  WM_DESTROY  - 종료 메시지를 게시하고 반환합니다.
 //
-// 메시지가 발생한 윈도우 id값, 메시지등등이 같이 들어옴. 
+// 메시지가 발생한 윈도우 id값, 메시지등등이 같이 들어옴.
+//이런 함수가 있다. 전방 선언. 
+INT_PTR __stdcall TileCountProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
@@ -193,7 +195,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         switch (wmId)
         {
         case IDM_ABOUT:
+            //여기가 도움말. 모달 방식(도움말에서 전부 주목(입력)을 다 가져감. -> 모달에서 리턴이 안되기 때문. 
+            //Visual Studio에도 리소스라는 것이 있음. About은 함수 포인터. 
             DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
+            break;
+
+        case ID_MENU_TILE:
+            DialogBox(hInst, MAKEINTRESOURCE(IDD_TILE_COUNT), hWnd, TileCountProc);
             break;
         case IDM_EXIT:
             DestroyWindow(hWnd);
@@ -253,9 +261,9 @@ INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
         return (INT_PTR)TRUE;
 
     case WM_COMMAND:
-        if (LOWORD(wParam) == IDOK || LOWORD(wParam) == IDCANCEL)
+        if (LOWORD(wParam) == IDOK || LOWORD(wParam) == IDCANCEL)// ok나 X창 누르면
         {
-            EndDialog(hDlg, LOWORD(wParam));
+            EndDialog(hDlg, LOWORD(wParam));    //Dialog 끝내기. 
             return (INT_PTR)TRUE;
         }
         break;

@@ -10,9 +10,8 @@ CResMgr::CResMgr() {
 }
 
 CResMgr::~CResMgr() {
-	for (auto mapIter : m_mapTex) {
-		delete mapIter.second;
-	}
+
+	Safe_Delete_Map(m_mapTex);
 }
 
 CTexture* CResMgr::LoadTexture(const wstring& _strKey, const wstring& _strRelativePath)
@@ -45,5 +44,5 @@ CTexture* CResMgr::FindTexture(const wstring& _strKey)
 	auto TextureIter = m_mapTex.find(_strKey);
 
 	if (TextureIter == m_mapTex.end()) return nullptr;
-	else return TextureIter->second;
+	else return (CTexture*)TextureIter->second;
 }

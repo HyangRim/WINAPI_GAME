@@ -9,6 +9,8 @@
 #include "CPathMgr.h"
 #include "CCollisionMgr.h"
 #include "CEventMgr.h"
+#include "CCamera.h"
+#include "CUIMgr.h"
 
 
 
@@ -96,6 +98,7 @@ void CCore::progress() {
 	// ============
 	CTimeMgr::GetInstance()->update();
 	CkeyMgr::GetInstance()->update();
+	CCamera::GetInstance()->update();
 
 	// ============
 	//	Scene Update
@@ -105,6 +108,9 @@ void CCore::progress() {
 
 	// 충돌 체크. 
 	CCollisionMgr::GetInstance()->update();
+
+	//UI 이벤트 체크
+	CUIMgr::GetInstance()->update();
 
 
 	// ============

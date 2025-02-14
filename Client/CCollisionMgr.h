@@ -30,6 +30,7 @@ public:
 	void CheckGroup(GROUP_TYPE eLeft, GROUP_TYPE e_Right);
 	void Reset() {
 		memset(m_arrCheck, 0, sizeof(UINT) * (UINT)GROUP_TYPE::END);
+		m_mapColInfo.clear();
 	}
 
 

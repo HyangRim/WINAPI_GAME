@@ -1,4 +1,6 @@
 #pragma once
+
+#include "global.h"
 class CRes
 {
 
@@ -16,6 +18,6 @@ public:
 
 public:
 	CRes();
-	~CRes();
+	virtual ~CRes();
 };
 

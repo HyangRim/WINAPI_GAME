@@ -3,6 +3,7 @@
 
 #include "CObject.h"
 #include "CSceneMgr.h"
+#include "CUIMgr.h"
 #include "CScene.h"
 
 
@@ -67,8 +68,14 @@ void CEventMgr::Excute(const tEvent& _eve)
 
 		break;
 	case EVENT_TYPE::SCENE_CHANGE:
+	{
+		// lParam : Next Scene Type
+		// wParam : NULL
+		CSceneMgr::GetInstance()->ChangeScene((SCENE_TYPE)_eve.lParam);
 
-
+		//이전 Scene에 대한 UI를 가리키고 있었기에 그거 해제. 
+		CUIMgr::GetInstance()->SetFocusedUI(nullptr);
+	}
 		break;
 	}
 }

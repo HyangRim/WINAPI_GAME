@@ -1,3 +1,7 @@
+F:\winapi\Client\Client\CAnimation.cpp;F:\winapi\Client\Client\x64\Debug\CAnimation.obj
+F:\winapi\Client\Client\CAnimator.cpp;F:\winapi\Client\Client\x64\Debug\CAnimator.obj
+F:\winapi\Client\Client\CBtnUI.cpp;F:\winapi\Client\Client\x64\Debug\CBtnUI.obj
+F:\winapi\Client\Client\CCamera.cpp;F:\winapi\Client\Client\x64\Debug\CCamera.obj
 F:\winapi\Client\Client\CCollider.cpp;F:\winapi\Client\Client\x64\Debug\CCollider.obj
 F:\winapi\Client\Client\CCollisionMgr.cpp;F:\winapi\Client\Client\x64\Debug\CCollisionMgr.obj
 F:\winapi\Client\Client\CCore.cpp;F:\winapi\Client\Client\x64\Debug\CCore.obj
@@ -5,6 +9,7 @@ F:\winapi\Client\Client\CEventMgr.cpp;F:\winapi\Client\Client\x64\Debug\CEventMg
 F:\winapi\Client\Client\CkeyMgr.cpp;F:\winapi\Client\Client\x64\Debug\CkeyMgr.obj
 F:\winapi\Client\Client\CMonster.cpp;F:\winapi\Client\Client\x64\Debug\CMonster.obj
 F:\winapi\Client\Client\CObject.cpp;F:\winapi\Client\Client\x64\Debug\CObject.obj
+F:\winapi\Client\Client\CPanelUI.cpp;F:\winapi\Client\Client\x64\Debug\CPanelUI.obj
 F:\winapi\Client\Client\CPathMgr.cpp;F:\winapi\Client\Client\x64\Debug\CPathMgr.obj
 F:\winapi\Client\Client\CPlayer.cpp;F:\winapi\Client\Client\x64\Debug\CPlayer.obj
 F:\winapi\Client\Client\CRes.cpp;F:\winapi\Client\Client\x64\Debug\CRes.obj
@@ -12,9 +17,13 @@ F:\winapi\Client\Client\CResMgr.cpp;F:\winapi\Client\Client\x64\Debug\CResMgr.ob
 F:\winapi\Client\Client\CScene.cpp;F:\winapi\Client\Client\x64\Debug\CScene.obj
 F:\winapi\Client\Client\CSceneMgr.cpp;F:\winapi\Client\Client\x64\Debug\CSceneMgr.obj
 F:\winapi\Client\Client\CScene_Start.cpp;F:\winapi\Client\Client\x64\Debug\CScene_Start.obj
+F:\winapi\Client\Client\CScene_Tool.cpp;F:\winapi\Client\Client\x64\Debug\CScene_Tool.obj
 F:\winapi\Client\Client\CSound.cpp;F:\winapi\Client\Client\x64\Debug\CSound.obj
 F:\winapi\Client\Client\CTexture.cpp;F:\winapi\Client\Client\x64\Debug\CTexture.obj
+F:\winapi\Client\Client\CTile.cpp;F:\winapi\Client\Client\x64\Debug\CTile.obj
 F:\winapi\Client\Client\CTimeMgr.cpp;F:\winapi\Client\Client\x64\Debug\CTimeMgr.obj
+F:\winapi\Client\Client\CUI.cpp;F:\winapi\Client\Client\x64\Debug\CUI.obj
+F:\winapi\Client\Client\CUIMgr.cpp;F:\winapi\Client\Client\x64\Debug\CUIMgr.obj
 F:\winapi\Client\Client\func.cpp;F:\winapi\Client\Client\x64\Debug\func.obj
 F:\winapi\Client\Client\main.cpp;F:\winapi\Client\Client\x64\Debug\main.obj
 F:\winapi\Client\Client\CMissile.cpp;F:\winapi\Client\Client\x64\Debug\CMissile.obj
