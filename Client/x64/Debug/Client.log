@@ -1,7 +1,2 @@
-﻿  CObject.cpp
-  CPlayer.cpp
-F:\winapi\Client\Client\CPlayer.cpp(94,16): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-F:\winapi\Client\Client\CPlayer.cpp(94,9): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-F:\winapi\Client\Client\CPlayer.cpp(92,10): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-F:\winapi\Client\Client\CPlayer.cpp(92,3): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+﻿  CScene_Start.cpp
   Client.vcxproj -> F:\winapi\Client\Output\bin_debug\Client.exe

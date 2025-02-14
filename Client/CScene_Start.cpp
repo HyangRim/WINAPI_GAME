@@ -91,6 +91,10 @@ void CScene_Start::Enter()
 
 	//Camera Look 지점.
 	CCamera::GetInstance()->SetLookAt(vResolution / 2.f);
+
+	//Camera 효과 지점. 
+	CCamera::GetInstance()->FadeOut(1.f);
+	CCamera::GetInstance()->FadeIn(1.f);
 }
 
 void CScene_Start::Exit()

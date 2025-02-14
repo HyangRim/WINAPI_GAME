@@ -86,20 +86,22 @@ void CPlayer::render(HDC _dc)
 	bf.BlendFlags = 0;
 	bf.AlphaFormat = AC_SRC_ALPHA;
 	bf.SourceConstantAlpha = 255;
+
+	
 	TransparentBlt(_dc,
 		int(vPos.x - ((float)(width / 2.f))),
 		int(vPos.y - ((float)(height / 2.f))),
-		width, height,
+		(int)width, (int)height,
 		pTex->GetDC(),
-		0, 0, width, height,
+		0, 0, (int)width, (int)height,
 		RGB(255, 0, 255));
 	/*
 	AlphaBlend(_dc
-		, vPos.x - width / 2.f
-		, vPos.y - height / 2.f
-		, width, height,
+		, int(vPos.x - width / 2.f)
+		, int(vPos.y - height / 2.f)
+		, int(width), int(height),
 		pTex->GetDC(),
-		0, 0, width, height, bf
+		0, 0, int(width), int(height), bf
 	);
 	*/
 	/*
